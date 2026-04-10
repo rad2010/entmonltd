@@ -1,0 +1,167 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid gold;
+}
+
+.logo {
+  font-size: 2rem;
+  color: gold;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+nav a {
+  color: gold;
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+nav a:hover { color: white; }
+
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  background: url('assets/hero.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(2px);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px black;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.hero button {
+  padding: 15px 40px;
+  background: gold;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px gold;
+}
+
+/* SECTION */
+.section {
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 50px;
+  color: gold;
+}
+
+/* PROPERTY GRID */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  padding: 0 40px;
+}
+
+.property-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  border: 2px solid gold;
+  transition: 0.4s;
+}
+
+.property-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.property-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+.property-info {
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.property-info h3 {
+  font-size: 1.6rem;
+  color: gold;
+}
+
+.property-info p {
+  font-size: 1.1rem;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: rgba(0,0,0,0.4);
+  border-top: 1px solid gold;
+}
+
+/* FADE-IN */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
