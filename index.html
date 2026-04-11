@@ -16,6 +16,8 @@
     <a href="#">Landlords</a>
     <a href="#">Tenants</a>
     <a href="#">Contact</a>
+    <a href="#properties" onclick="loadProperties(event)">Properties</a>
+
   </nav>
 </header>
 
@@ -28,6 +30,14 @@
     <button onclick="scrollToSection()">Explore Listings</button>
   </div>
 </section>
+
+<section id="properties">
+  <h2>Properties For Sale</h2>
+  <p id="properties-loading" style="display:none;">Loading properties...</p>
+  <p id="properties-error" style="display:none; color:red;">Failed to load properties.</p>
+  <div id="property-list" class="property-grid"></div>
+</section>
+
 
 <!-- FEATURED LISTINGS -->
 <section id="listings" class="section fade-in">
