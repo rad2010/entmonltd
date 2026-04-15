@@ -27,6 +27,7 @@ const TOKEN_ENDPOINT = COGNITO_DOMAIN + '/oauth2/token';
 const SCOPES = 'openid email profile';
 
 document.addEventListener('DOMContentLoaded', () => {
+  console.log("DOMContentLoaded fired, script.js running");
   const loginBtn = document.getElementById('login-btn');
   if (loginBtn) {
     loginBtn.addEventListener('click', startLogin);
