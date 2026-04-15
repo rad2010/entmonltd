@@ -39,6 +39,20 @@
 
 <button id="login-btn">Login</button>
 
+<button id="callLambda">Get Server Time</button>
+<div id="result"></div>
+
+<script>
+document.getElementById("callLambda").addEventListener("click", async () => {
+    const res = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
+    const data = await res.json();
+    document.getElementById("result").innerHTML = `
+        <p>${data.message}</p>
+        <p>Server time: ${data.serverTime}</p>
+    `;
+});
+</script>
+
 <!-- FEATURED LISTINGS -->
 <section id="listings" class="section fade-in">
   <h2>Featured Listings</h2>
