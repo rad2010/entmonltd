@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>v1Aditya | Luxury Property Agency</title>
+<title>Aditya | Luxury Property Agency</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -65,6 +65,30 @@
 </section>
 
 <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Inline script loaded");
+
+    const btn = document.getElementById("callLambda");
+    btn.addEventListener("click", async () => {
+        console.log("Button clicked");
+
+        try {
+            const res = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
+            const data = await res.json();
+            console.log("API response:", data);
+
+            document.getElementById("result").innerHTML = `
+                <p>${data.message}</p>
+                <p>Server time: ${data.serverTime}</p>
+            `;
+        } catch (err) {
+            console.error("Error calling API:", err);
+        }
+    });
+});
+</script>
 
 </body>
 </html>
