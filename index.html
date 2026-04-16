@@ -16,11 +16,9 @@
     <a href="#">Tenants</a>
     <a href="#">Contact</a>
     <a href="#properties" onclick="loadProperties(event)">Properties</a>
-
   </nav>
 </header>
 
-<!-- HERO SECTION WITH FULLSCREEN IMAGE -->
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content fade-in">
@@ -42,19 +40,6 @@
 <button id="callLambda">Get Server Time</button>
 <div id="result"></div>
 
-<script>
-document.getElementById("callLambda").addEventListener("click", async () => {
-    const res = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
-    const data = await res.json();
-    document.getElementById("result").innerHTML = `
-        <p>${data.message}</p>
-        <p>Server time: ${data.serverTime}</p>
-    `;
-});
-</script>
-
-
-<!-- FEATURED LISTINGS -->
 <section id="listings" class="section fade-in">
   <h2>Featured Listings</h2>
 
@@ -74,8 +59,12 @@ document.getElementById("callLambda").addEventListener("click", async () => {
         <h3>Modern Family Home</h3>
         <p>£650,000 • Didsbury</p>
       </div>
-<button id="login-btn">Login</button>
+    </div>
 
-      <script src="script.js"></script>
+  </div>
+</section>
 
-      </body>
+<script src="script.js"></script>
+
+</body>
+</html>
