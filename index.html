@@ -1,94 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>v5Aditya | Luxury Property Agency</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-
-<header class="fade-in">
-  <div class="logo">ENTMON LTD</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Landlords</a>
-    <a href="#">Tenants</a>
-    <a href="#">Contact</a>
-    <a href="#properties" onclick="loadProperties(event)">Properties</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content fade-in">
-    <h1>Luxury Property. Exceptional Service.</h1>
-    <p>Premium homes & exclusive investment opportunities.</p>
-    <button onclick="scrollToSection()">Explore Listings</button>
-  </div>
-</section>
-
-<section id="properties">
-  <h2>Properties For Sale</h2>
-  <p id="properties-loading" style="display:none;">Loading properties...</p>
-  <p id="properties-error" style="display:none; color:red;">Failed to load properties.</p>
-  <div id="property-list" class="property-grid"></div>
-</section>
-
-<button id="login-btn">Login</button>
-
-<button id="callLambda">Get Server Time</button>
-<div id="result"></div>
-
-<section id="listings" class="section fade-in">
-  <h2>Featured Listings</h2>
-
-  <div class="property-grid">
-
-    <div class="property-card">
-      <img src="assets/penthouse.jpg" alt="Penthouse">
-      <div class="property-info">
-        <h3>City Penthouse</h3>
-        <p>£1,200,000 • Manchester City Centre</p>
-      </div>
-    </div>
-
-    <div class="property-card">
-      <img src="assets/familyhome.jpg" alt="Family Home">
-      <div class="property-info">
-        <h3>Modern Family Home</h3>
-        <p>£650,000 • Didsbury</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<script src="script.js"></script>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Inline script loaded");
 
     const btn = document.getElementById("callLambda");
+
     btn.addEventListener("click", async () => {
         console.log("Button clicked");
 
         try {
-            const res = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
-            const data = await res.json();
-            console.log("API response:", data);
+            // 1️⃣ Call getTime API
+            const timeRes = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
+            const timeData = await timeRes.json();
+            console.log("Time API response:", timeData);
 
+            // 2️⃣ Send metadata to storeClick API
+            const payload = {
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                page: window.location.href
+            };
+
+            const clickRes = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/storeClick", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            const clickData = await clickRes.json();
+            console.log("Click stored:", clickData);
+
+            // 3️⃣ Update UI
             document.getElementById("result").innerHTML = `
-                <p>${data.message}</p>
-                <p>Server time: ${data.serverTime}</p>
+                <p>${timeData.message}</p>
+                <p>Server time: ${timeData.serverTime}</p>
+                <p>Click logged: ${clickData.message}</p>
             `;
+
         } catch (err) {
-            console.error("Error calling API:", err);
+            console.error("Error:", err);
         }
     });
 });
 </script>
-
-</body>
-</html>
