@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>v4Entmon Ltd | Luxury Property Agency</title>
+<title>v6Entmon Ltd | Luxury Property Agency</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -16,6 +16,8 @@
     <a href="#">Landlords</a>
     <a href="#">Tenants</a>
     <a href="#">Contact</a>
+    <button id="login-btn" class="nav-btn">Login</button>
+    <button id="logout-btn" class="nav-btn" style="display:none;">Logout</button>
   </nav>
 </header>
 
@@ -54,7 +56,7 @@
   </div>
 </section>
 
-<!-- TEST BUTTON FOR LAMBDA -->
+<!-- SERVER TIME TEST -->
 <section class="section fade-in">
   <h2>Server Time Test</h2>
   <button id="callLambda">Get Server Time</button>
@@ -69,6 +71,31 @@ function scrollToSection() {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Inline script loaded");
 
+    // -------------------------
+    // LOGIN BUTTON
+    // -------------------------
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    loginBtn.addEventListener("click", () => {
+        window.location.href =
+          "https://us-west-2v03dvdkpl.auth.us-west-2.amazoncognito.com/login" +
+          "?client_id=5904tm4k2caibf3fbfg5l19305" +
+          "&response_type=code" +
+          "&scope=openid+email+profile" +
+          "&redirect_uri=https://d221yrhrbif8cn.cloudfront.net";
+    });
+
+    logoutBtn.addEventListener("click", () => {
+        window.location.href =
+          "https://us-west-2v03dvdkpl.auth.us-west-2.amazoncognito.com/logout" +
+          "?client_id=5904tm4k2caibf3fbfg5l19305" +
+          "&logout_uri=https://d221yrhrbif8cn.cloudfront.net";
+    });
+
+    // -------------------------
+    // SERVER TIME BUTTON
+    // -------------------------
     const btn = document.getElementById("callLambda");
     if (!btn) {
         console.error("callLambda button not found");
