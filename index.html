@@ -79,11 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Button clicked");
 
         try {
-            // 1️⃣ Call getTime API
             const timeRes = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
             const timeData = await timeRes.json();
 
-            // 2️⃣ Send metadata to storeClick API
             const payload = {
                 timestamp: new Date().toISOString(),
                 userAgent: navigator.userAgent,
@@ -98,13 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const clickData = await clickRes.json();
 
-            // 3️⃣ Update UI
             document.getElementById("result").innerHTML = `
                 <p>${timeData.message}</p>
                 <p>Server time: ${timeData.serverTime}</p>
                 <p>Click logged: ${clickData.message}</p>
             `;
-
         } catch (err) {
             console.error("Error:", err);
         }
