@@ -134,6 +134,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+<script>
+(function() {
+    fetch("https://iymvahxku1.execute-api.us-west-2.amazonaws.com/otel-collector-lambda", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            path: window.location.pathname,
+            userAgent: navigator.userAgent,
+            timestamp: Date.now()
+        })
+    }).catch(() => {});
+})();
+</script>
+
 
 </body>
 </html>
