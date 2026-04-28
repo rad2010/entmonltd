@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>v12-1Entmon Ltd | Luxury Property Agency</title>
+<title>v13Entmon Ltd | Luxury Property Agency</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -118,3 +118,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("result").innerHTML = `
                     <p>${timeData.message}</p>
                     <p>Server time: ${timeData.serverTime}</p>
+                    <p>Click logged: ${clickData.message}</p>
+                `;
+            } catch (err) {
+                console.error("Error:", err);
+            }
+        });
+    }
+
+    // -------------------------
+    // EXPLORE LISTINGS BUTTON (OTLP fires here)
+    // -------------------------
+    const exploreBtn = document.getElementById("exploreBtn");
+    exploreBtn.addEventListener("click", () => {
+
+        // Scroll to listings
+        document.getElementById("listings").scrollIntoView({ behavior: "smooth" });
+
+        // Emit OTLP only when button is pressed
+        fetch("https://iymvahxku1.execute-api.us-west-2.amazonaws.com/otel-collector-lambda", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                event: "explore_listings_click",
+                path: window.location.pathname,
+                userAgent: navigator.userAgent,
+                timestamp: Date.now()
+            })
+        }).catch(() => {});
+    });
+
+});
+</script>
+
+</body>
+</html>
