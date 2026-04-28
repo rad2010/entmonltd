@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>v13Entmon Ltd | Luxury Property Agency</title>
+<title>v14Entmon Ltd | Luxury Property Agency</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("listings").scrollIntoView({ behavior: "smooth" });
 
         // Emit OTLP only when button is pressed
-        fetch("https://iymvahxku1.execute-api.us-west-2.amazonaws.com/otel-collector-lambda", {
+        fetch("https://iymvahxku1.execute-api.us-west-2.amazonaws.com/entmon-login-otel", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
