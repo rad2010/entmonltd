@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>v11Entmon Ltd | Luxury Property Agency</title>
+<title>v12Entmon Ltd | Luxury Property Agency</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -27,7 +27,7 @@
   <div class="hero-content fade-in">
     <h1>Luxury Property. Exceptional Service.</h1>
     <p>Premium homes & exclusive investment opportunities.</p>
-    <button onclick="scrollToSection()">Explore Listings</button>
+    <button id="exploreBtn">Explore Listings</button>
   </div>
 </section>
 
@@ -64,10 +64,6 @@
 </section>
 
 <script>
-function scrollToSection() {
-  document.getElementById("listings").scrollIntoView({ behavior: "smooth" });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Inline script loaded");
 
@@ -90,67 +86,35 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href =
           "https://us-west-2v03dvdkpl.auth.us-west-2.amazoncognito.com/logout" +
           "?client_id=5904tm4k2caibf3fbfg5l19305" +
-          "&logout_uri=https://wwww.entmon.click";
+          "&logout_uri=https://www.entmon.click";
     });
 
     // -------------------------
     // SERVER TIME BUTTON
     // -------------------------
     const btn = document.getElementById("callLambda");
-    if (!btn) {
-        console.error("callLambda button not found");
-        return;
-    }
+    if (btn) {
+        btn.addEventListener("click", async () => {
+            console.log("Button clicked");
 
-    btn.addEventListener("click", async () => {
-        console.log("Button clicked");
+            try {
+                const timeRes = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
+                const timeData = await timeRes.json();
 
-        try {
-            const timeRes = await fetch("https://1pimyu2thk.execute-api.us-east-1.amazonaws.com/getTime");
-            const timeData = await timeRes.json();
+                const payload = {
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                    page: window.location.href
+                };
 
-            const payload = {
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                page: window.location.href
-            };
+                const clickRes = await fetch("https://csn52d2cli.execute-api.us-east-1.amazonaws.com/storeClick", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
 
-            const clickRes = await fetch("https://csn52d2cli.execute-api.us-east-1.amazonaws.com/storeClick", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+                const clickData = await clickRes.json();
 
-            const clickData = await clickRes.json();
-
-            document.getElementById("result").innerHTML = `
-                <p>${timeData.message}</p>
-                <p>Server time: ${timeData.serverTime}</p>
-                <p>Click logged: ${clickData.message}</p>
-            `;
-        } catch (err) {
-            console.error("Error:", err);
-        }
-    });
-});
-</script>
-<script>
-(function() {
-    fetch("https://iymvahxku1.execute-api.us-west-2.amazonaws.com/otel-collector-lambda", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            path: window.location.pathname,
-            userAgent: navigator.userAgent,
-            timestamp: Date.now()
-        })
-    }).catch(() => {});
-})();
-</script>
-
-
-</body>
-
-
-
-</html>
+                document.getElementById("result").innerHTML = `
+                    <p>${timeData.message}</p>
+                    <p>Server time: ${timeData.serverTime}</p>
